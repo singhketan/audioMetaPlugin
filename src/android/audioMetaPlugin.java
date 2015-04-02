@@ -12,18 +12,18 @@ public class audioMetaPlugin extends CordovaPlugin {
 
         if (action.equals("pullID3")) {
             
-			MediaMetadataRetriever metaRetriver = new MediaMetadataRetriever();
+			//MediaMetadataRetriever metaRetriver = new MediaMetadataRetriever();
 			String filePath = args.getString(0);
-			metaRetriver.setDataSource(filePath);
+			//metaRetriver.setDataSource(filePath);
 				
-			String result = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST).toString(); 
+			//String result = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST).toString(); 
 			
-			String test = "Here!";
-			callbackContext.success(test);
+			//String test = "Here!";
+			callbackContext.success(filePath);
 			return true;
 
         } else {
-		
+	    callbackContext.error("Unknown method.");
             return false;
 
         }
