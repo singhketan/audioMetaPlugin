@@ -2,8 +2,8 @@
 
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        id="com.ketan.audioMetaPlugin"
-        version="0.6.4">
+        id="com.ketan.audio-meta-plugin"
+        version="0.0.1">
 
     <name>audioMetaPlugin</name>
 
@@ -39,7 +39,8 @@
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="audioMetaPlugin" >
                 <param name="android-package"
-                      value="com.ketan.plugin.audio"/>
+                      value="com.ketan.plugin.audio.audioMetaPlugin"/>
+				<param name="onload" value="true" />
             </feature>
         </config-file>
 
