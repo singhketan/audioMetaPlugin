@@ -52,8 +52,7 @@ public class audioMetaPlugin extends CordovaPlugin {
 			{
 				GENRE = "unknown-genre";
 			}
-			
-			r.put("fullpath", getPath.toString());
+		
 			r.put("album", ALBUM.toString());
 			r.put("artist", ARTIST.toString());
 			r.put("genre", GENRE.toString());
