@@ -47,16 +47,6 @@
             <preference name="KeepRunning" value="true" />
         </config-file>
 
-        <!--<config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <!--
-             * Puts the service in a foreground state, where the system considers
-             * it to be something the user is actively aware of and thus not a
-             * candidate for killing when low on memory.
-            
-            <service android:name="de.appplant.cordova.plugin.background.ForegroundService" />
-
-        </config-file> -->
-
         <source-file
             src="src/android/audioMetaPlugin.java"
             target-dir="src/com/ketan/plugin/audio" />
