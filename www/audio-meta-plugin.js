@@ -11,12 +11,9 @@ channel.onCordovaReady.subscribe(function () {
     // Device plugin is ready now
     channel.onCordovaInfoReady.subscribe(function () {
         // Set the defaults
+        console.log("At least here now");
         exports.getID3 = function(filePath, successCallback, errorCallback) {
 			cordova.exec(successCallback, errorCallback, "audioMetaPlugin", "pullID3", [filePath]);
 		};
     });
 });
-
-exports.getID3 = function(filePath, successCallback, errorCallback) {
-			cordova.exec(successCallback, errorCallback, "audioMetaPlugin", "pullID3", [filePath]);
-		};
