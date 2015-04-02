@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="com.ketan.audioMetaPlugin"
+        version="0.6.4">
+
+    <name>audioMetaPlugin</name>
+
+    <description>
+       A cordova plugin to pull the meta info of media files.
+    </description>
+
+    <repo>https://github.com/singhketan/audioMetaPlugin</repo>
+
+    <keywords>audioMetaPlugin, id3</keywords>
+
+    <license>Apache 2.0</license>
+
+    <author>Ketan Singh</author>
+
+    <!-- dependencies -->
+    <dependency id="org.apache.cordova.device" />
+
+    <!-- cordova -->
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+
+    <!-- js -->
+    <js-module src="www/audio-meta-plugin.js" name="audioMetaPlugin">
+        <clobbers target="cordova.plugins.audioMetaPlugin" />
+        <clobbers target="plugin.audioMetaPlugin" />
+    </js-module>
+
+
+    <!-- android -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="audioMetaPlugin" >
+                <param name="android-package"
+                      value="com.ketan.plugin.audio"/>
+            </feature>
+        </config-file>
+
+        <config-file target="res/xml/config.xml" parent="/*">
+            <preference name="KeepRunning" value="true" />
+        </config-file>
+
+        <!--<config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <!--
+             * Puts the service in a foreground state, where the system considers
+             * it to be something the user is actively aware of and thus not a
+             * candidate for killing when low on memory.
+            
+            <service android:name="de.appplant.cordova.plugin.background.ForegroundService" />
+
+        </config-file> -->
+
+        <source-file
+            src="src/android/audioMetaPlugin.java"
+            target-dir="src/com/ketan/plugin/audio" />
+    </platform>
+
+</plugin>
