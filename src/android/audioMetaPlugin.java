@@ -15,15 +15,10 @@ public class audioMetaPlugin extends CordovaPlugin {
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 		if (action.equals("pullID3")) { 
-			JSONObject argObject = args.getJSONObject(0);
 			JSONObject r = new JSONObject();
-			
-		   // Here goes our custom code
-			//String path = "/sdcard";
-			String getPath = argObject.getString("FilePath");
-
 			MediaMetadataRetriever metaRetriver = new MediaMetadataRetriever(); 
-			metaRetriver.setDataSource(fullpath);
+			String filePath = args.getString(0);
+			metaRetriver.setDataSource(filePath);
 			
 			try 
 			{
