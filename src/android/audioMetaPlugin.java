@@ -15,11 +15,12 @@ public class audioMetaPlugin extends CordovaPlugin {
 	@Override
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 		if (action.equals("pullID3")) { 
+			
+			final String filePath = args.getString(0);
 			cordova.getThreadPool().execute(new Runnable() {
 		                public void run() {
-		                    JSONObject r = new JSONObject();
+		                    	JSONObject r = new JSONObject();
 					MediaMetadataRetriever metaRetriver = new MediaMetadataRetriever(); 
-					String filePath = args.getString(0);
 					metaRetriver.setDataSource(filePath);
 					
 					try {
