@@ -12,33 +12,28 @@ public class audioMetaPlugin extends CordovaPlugin {
 	public static String ARTIST;
 
 	@Override
-	public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
+	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 		if (action.equals("pullID3")) { 
 			
-			final String filePath = args.getString(0);
-			cordova.getThreadPool().execute(new Runnable() {
-		                public void run() {
-		                	try {
-						JSONObject r = new JSONObject();
-						MediaMetadataRetriever metaRetriver = new MediaMetadataRetriever(); 
-						metaRetriver.setDataSource(filePath);
-						
-						ALBUM = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM).toString();
-						
-						ARTIST = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST).toString(); 
-	
-						r.put("filePath", filePath.toString());
-						r.put("artist", ARTIST.toString());
-						r.put("album", ALBUM.toString());
-						
-						callbackContext.success(r.toString());
-					} 
-					catch (JSONException e) {
-					        callbackContext.error("Something went wrong");
-					}
-		                }
-        		 });
-        		 return true;
+			String filePath = args.getString(0);
+			MediaMetadataRetriever metaRetriver = new MediaMetadataRetriever(); 
+			metaRetriver.setDataSource(filePath);
+				
+			ALBUM = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM).toString();
+			ARTIST = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST).toString(); 
+			
+                	try {
+				JSONObject r = new JSONObject();
+				r.put("filePath", filePath.toString());
+				r.put("artist", ARTIST.toString());
+				r.put("album", ALBUM.toString());
+				callbackContext.success(r.toString());
+			} 
+			catch (JSONException e) {
+			        callbackContext.error("Something went wrong with JSONObject most probably.");
+			}
+			
+        		return true;
 		}
 		else
 		{
