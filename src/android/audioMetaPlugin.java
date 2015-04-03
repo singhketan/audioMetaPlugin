@@ -18,20 +18,25 @@ public class audioMetaPlugin extends CordovaPlugin {
 			final String filePath = args.getString(0);
 			cordova.getThreadPool().execute(new Runnable() {
 		                public void run() {
-		                    	JSONObject r = new JSONObject();
-					MediaMetadataRetriever metaRetriver = new MediaMetadataRetriever(); 
-					metaRetriver.setDataSource(filePath);
-					
-					ALBUM = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM).toString();
-					
-					ARTIST = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST).toString(); 
-
-					r.put("filePath", filePath.toString());
-					r.put("artist", ARTIST.toString());
-					r.put("album", ALBUM.toString());
-					
-					callbackContext.success(r.toString());
-					
+		                	try {
+						JSONObject r = new JSONObject();
+						MediaMetadataRetriever metaRetriver = new MediaMetadataRetriever(); 
+						metaRetriver.setDataSource(filePath);
+						
+						ALBUM = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM).toString();
+						
+						ARTIST = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST).toString(); 
+	
+						r.put("filePath", filePath.toString());
+						r.put("artist", ARTIST.toString());
+						r.put("album", ALBUM.toString());
+						
+						callbackContext.success(r.toString());
+					} 
+					catch (JSONException e) {
+					        Log.e(TAG, "Invalid JSON string: " + json, e);
+					        callbackContext.error("Something went wrong");
+					}
 		                }
         		 });
         		 return true;
