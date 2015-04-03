@@ -52,10 +52,10 @@ public class audioMetaPlugin extends CordovaPlugin {
 					r.put("genre", GENRE.toString());
 					
 					callbackContext.success(r.toString());
-					return true;
+					
 		                }
         		 });
-			
+        		 return true;
 		}
 		else
 		{
