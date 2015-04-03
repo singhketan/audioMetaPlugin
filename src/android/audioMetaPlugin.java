@@ -10,8 +10,7 @@ import android.media.MediaMetadataRetriever;
 public class audioMetaPlugin extends CordovaPlugin {
 	public static String ALBUM;
 	public static String ARTIST;
-	public static String GENRE;
-	
+
 	@Override
 	public boolean execute(String action, JSONArray args, final CallbackContext callbackContext) throws JSONException {
 		if (action.equals("pullID3")) { 
@@ -23,33 +22,13 @@ public class audioMetaPlugin extends CordovaPlugin {
 					MediaMetadataRetriever metaRetriver = new MediaMetadataRetriever(); 
 					metaRetriver.setDataSource(filePath);
 					
-					try {
-						ALBUM = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM).toString();
-	
-					}
-					catch (Exception e){
-						ALBUM = "unknown-album";
-					}
+					ALBUM = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM).toString();
 					
-					try {
-						ARTIST = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST).toString(); 
-					}
-					catch (Exception e){
-						ARTIST = "unknown-artist";
-					}
-					
-					try {
-						GENRE = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_GENRE).toString();
-					}
-					catch (Exception e){
-						GENRE = "unknown-genre";
-					}
-					
-			
-				
-					r.put("album", ALBUM.toString());
+					ARTIST = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST).toString(); 
+
+					r.put("filePath", filePath.toString());
 					r.put("artist", ARTIST.toString());
-					r.put("genre", GENRE.toString());
+					r.put("album", ALBUM.toString());
 					
 					callbackContext.success(r.toString());
 					
