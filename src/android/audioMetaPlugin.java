@@ -34,7 +34,6 @@ public class audioMetaPlugin extends CordovaPlugin {
 						callbackContext.success(r.toString());
 					} 
 					catch (JSONException e) {
-					        Log.e(TAG, "Invalid JSON string: " + json, e);
 					        callbackContext.error("Something went wrong");
 					}
 		                }
