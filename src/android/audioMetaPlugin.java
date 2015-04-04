@@ -20,9 +20,26 @@ public class audioMetaPlugin extends CordovaPlugin {
 			MediaMetadataRetriever metaRetriver = new MediaMetadataRetriever(); 
 			metaRetriver.setDataSource(fullPath);
 			
-			TITLE = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE).toString();	
-			ALBUM = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM).toString();
-			ARTIST = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST).toString(); 
+			try{
+				TITLE = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE).toString();	
+			}
+			catch(Exception e){
+				TITLE = "";
+			}
+			
+			try{
+				ALBUM = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM).toString();
+			}
+			catch(Exception e){
+				ALBUM = "";
+			}
+			
+			try{
+				ARTIST = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST).toString(); 
+			}
+			catch(Exception e){
+				ARTIST = ""; 
+			}
 			
                 	try {
 				JSONObject r = new JSONObject();
