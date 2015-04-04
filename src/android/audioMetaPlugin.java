@@ -8,6 +8,7 @@ import org.json.JSONObject;
 import android.media.MediaMetadataRetriever;
 
 public class audioMetaPlugin extends CordovaPlugin {
+	public static String TITLE;
 	public static String ALBUM;
 	public static String ARTIST;
 
@@ -15,18 +16,20 @@ public class audioMetaPlugin extends CordovaPlugin {
 	public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
 		if (action.equals("pullID3")) { 
 			
-			String filePath = args.getString(0);
+			String fullPath = args.getString(0);
 			MediaMetadataRetriever metaRetriver = new MediaMetadataRetriever(); 
-			metaRetriver.setDataSource(filePath);
-				
+			metaRetriver.setDataSource(fullPath);
+			
+			TITLE = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE).toString();	
 			ALBUM = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM).toString();
 			ARTIST = metaRetriver.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST).toString(); 
 			
                 	try {
 				JSONObject r = new JSONObject();
-				r.put("filePath", filePath.toString());
+				r.put("fullPath", fullPath.toString());
 				r.put("artist", ARTIST.toString());
 				r.put("album", ALBUM.toString());
+				r.put("title", TITLE.toString());
 				callbackContext.success(r.toString());
 			} 
 			catch (JSONException e) {
